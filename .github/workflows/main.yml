@@ -30,8 +30,9 @@ jobs:
 
       - name: Configure JFrog CLI
         run: |
+          jf rt ping
           jf npm-config --repo-resolve eytanr-npm
-          jf rt pint
+          
 
       - name: Run npm install with JFrog CLI
         run: jf npm install
