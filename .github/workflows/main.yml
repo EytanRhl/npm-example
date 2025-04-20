@@ -27,6 +27,7 @@ jobs:
           JF_URL: https://idani.jfrog.io # Your JFrog Artifactory URL
         with:
           oidc-provider-name: setup-jfrog-cli
+          oidc-audience: jfrog-github
 
       - name: Configure JFrog CLI
         run: |
