@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18.x'  # Or your desired Node.js version
+          node-version: '20.x'  # Or your desired Node.js version
 
       - name: Set up JFrog CLI
         uses: jfrog/setup-jfrog-cli@v4
@@ -28,6 +28,7 @@ jobs:
           JFROG_CLI_LOG_LEVEL: DEBUG
         with:
           oidc-provider-name: setup-jfrog-cli
+          version: 2.74.1
 
       - name: Configure JFrog CLI
         run: |
