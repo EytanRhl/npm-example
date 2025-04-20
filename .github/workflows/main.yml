@@ -32,6 +32,7 @@ jobs:
 
       - name: Configure JFrog CLI
         run: |
+          jf c add --url https://idani.jfrog.io
           jf rt ping
           jf npm-config --repo-resolve eytanr-npm
           
