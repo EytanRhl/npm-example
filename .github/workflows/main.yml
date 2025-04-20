@@ -30,8 +30,7 @@ jobs:
 
       - name: Configure JFrog CLI
         run: |
-          jf config use setup-jfrog-cli --server-id default
-          jf config set-credentials --server-id default --access-token "$${{ secrets.JFROG_ACCESS_TOKEN }}" # Use GitHub secret
+          jf config use setup-jfrog-cli
 
       - name: Run npm install with JFrog CLI
         run: jf npm install
