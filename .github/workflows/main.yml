@@ -1,0 +1,37 @@
+name: JFrog Workflow
+on:
+  push:
+    branches:
+      - main # or your main branch
+  pull_request:
+    branches:
+      - main # or your main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # Required for OIDC authentication with JFrog
+      contents: read #  Required for actions/checkout to fetch the repository
+
+    steps:
+      - uses: actions/checkout@v4 # Check out the repository
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'  # Or your desired Node.js version
+
+      - name: Set up JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v4
+        env:
+          JF_URL: https://idani.jfrog.io # Your JFrog Artifactory URL
+        with:
+          oidc-provider-name: setup-jfrog-cli
+
+      - name: Configure JFrog CLI
+        run: |
+          jf config use setup-jfrog-cli --server-id default
+          jf config set-credentials --server-id default --access-token "$${{ secrets.JFROG_ACCESS_TOKEN }}" # Use GitHub secret
+
+      - name: Run npm install with JFrog CLI
+        run: jf npm install
